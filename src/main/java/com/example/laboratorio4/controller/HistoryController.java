@@ -1,6 +1,7 @@
 package com.example.laboratorio4.controller;
 
 import com.example.laboratorio4.repository.EmployeesRepository;
+import com.example.laboratorio4.repository.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 public class HistoryController {
 
     @Autowired
-    EmployeesRepository employeesRepository;
+    HistoryRepository historyRepository;
 
     @GetMapping(value = {"","/"})
     public String historialEmpleado(Model model){
 
-        model.addAttribute("listaHistorial", employeesRepository.empleadosmastiempotrabajando());
+        model.addAttribute("listaHistorial", historyRepository.empleadosmastiempotrabajando());
         return "history/lista";
     }
 
