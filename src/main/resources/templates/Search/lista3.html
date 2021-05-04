@@ -14,9 +14,24 @@
             <table class="table">
                 <thead>
                 <!-- COMPLETAR -->
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Cargo</th>
+                    <th>Sueldo</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                <!-- COMPLETAR -->
+                <tr th:each="usuario : ${listaEmpleadoDepa}">
+
+                    <td th:text="${usuario.employee_id}"></td>
+                    <td th:text="${usuario.first_name}"></td>
+                    <td th:text="${usuario.last_name}"></td>
+                    <td th:text="${usuario.job_title}"></td>
+                    <td th:text="${usuario.salary}"></td>
+                    <td><a class="btn btn-primary" th:href="@{'/employee/edit' + '?id=' + ${usuario.employee_id}}">Editar</a>
                 </tr>
                 </tbody>
             </table>

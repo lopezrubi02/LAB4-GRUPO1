@@ -27,8 +27,9 @@
             <td th:text="${employee.department_id}"></td>
             <td th:text="${employee.department_name}"></td>
             <td th:text="${employee.promedio}"></td>
-            <td><!--a class="btn btn-primary" th:href="@{'/employee/edit' + '?id=' + ${employee.employeeId}}">Editar</a-->
+            <td><a class="btn btn-primary" th:href="@{'/Search/listar' + '?id=' + ${employee.department_id}}">Info</a>
             </td>
+        </tr>
             <!-- COMPLETAR -->
         </tbody>
     </table>

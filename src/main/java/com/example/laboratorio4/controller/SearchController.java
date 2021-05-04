@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.jws.WebParam;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -67,8 +68,8 @@ public class SearchController {
     }
 
     @GetMapping("/listar")
-    public String listarEmpleadoDep() {
-        //COMPLETAR
+    public String listarEmpleadoDep(@RequestParam("id") int id, Model model) {
+        model.addAttribute("listaEmpleadoDepa",employeesRepository.empleadosPorDepartamento(id));
         return "/Search/lista3";
 
     }

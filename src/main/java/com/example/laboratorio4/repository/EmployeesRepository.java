@@ -1,6 +1,7 @@
 package com.example.laboratorio4.repository;
 
 import com.example.laboratorio4.dto.Departamentosueldopromedio;
+import com.example.laboratorio4.dto.EmpleadoDepartamento;
 import com.example.laboratorio4.dto.Empleadosporsalario;
 import com.example.laboratorio4.dto.Empleadosportiempo;
 import com.example.laboratorio4.entity.Employees;
@@ -44,5 +45,11 @@ public interface EmployeesRepository extends JpaRepository<Employees,Integer> {
             "group by department_id " +
             "order by promedio DESC;",nativeQuery = true)
     List<Departamentosueldopromedio> depasueldopromedio();
+
+    @Query(value = "select employee_id,first_name,last_name,j.job_title,salary from employees e\n" +
+            "inner join jobs j on (e.job_id=j.job_id)\n" +
+            "where department_id = ?1\n" +
+            "order by salary DESC;", nativeQuery = true)
+    List<EmpleadoDepartamento> empleadosPorDepartamento(int id);
 
 }
