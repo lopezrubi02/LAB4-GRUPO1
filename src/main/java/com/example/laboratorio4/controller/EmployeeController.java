@@ -49,8 +49,6 @@ public class EmployeeController {
         return "employee/Frm";
     }
 
-
-
     @PostMapping("/save")
     public String guardarEmployee(@ModelAttribute("employees") @Valid Employees employees, BindingResult bindingResult,
                                   RedirectAttributes attr,

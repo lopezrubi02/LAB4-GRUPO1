@@ -25,6 +25,7 @@ public class SearchController {
     public String buscar (){
 
         //COMPLETAR
+        return "/Search/salario";
     }
 
     @GetMapping(value = "/Filtro2")
