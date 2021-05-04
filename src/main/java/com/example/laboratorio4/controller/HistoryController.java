@@ -18,7 +18,6 @@ public class HistoryController {
     public String historialEmpleado(Model model){
 
         model.addAttribute("listaHistorial", employeesRepository.empleadosmastiempotrabajando());
-        System.out.println(employeesRepository.empleadosmastiempotrabajando());
         return "history/lista";
     }
 
