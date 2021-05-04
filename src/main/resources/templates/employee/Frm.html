@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/navbar.html :: header( title = 'Empleados')"></head>
+    <head></head>
     <body>
         <div class="container">
-            <nav th:replace="fragments/navbar.html :: navbar( active = 'Employee')"></nav>
+
             <div class="row mb-4">
                 <div class="col-md-6 offset-md-3">
                     <h2 th:text="${employee.getEmployeeId() == 0? 'Nuevo Empleado' : 'Editar Empleado'}"></h2>
@@ -28,7 +28,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Cargo</label>
-                            <select class="form-select" th:field="*{job}">
+                            <select class="form-select" th:field="*{jobs}">
                                 <option th:each="job : ${listaJobs}"
                                         th:text="|${job.getJobtitle()} |"
                                         th:value="${job.getJobid()}"></option>
@@ -63,6 +63,6 @@
                 </div>
             </div>
         </div>
-        <script th:replace="fragments/navbar.html :: footer-bootstrap"></script>
+        <!--script th:replace="fragments/navbar.html :: footer-bootstrap"></script-->
     </body>
 </html>
