@@ -38,7 +38,7 @@
                     <td th:text="${employee.getDepartment().getLocationid().getCity()}"></td>
                     <td><a class="btn btn-primary" th:href="@{'/employee/edit' + '?id=' + ${employee.getEmployeeId()}}">Editar</a>
                     </td>
-                    <td><a class="btn btn-danger" th:href="@{'/employee/delete' + '?id=' + ${employee.getEmployeeId}}">Borrar</a>
+                    <td><a class="btn btn-danger" th:href="@{'/employee/delete' + '?id=' + ${employee.getEmployeeId()}}">Borrar</a>
                     </td>
                 </tr>
                 </tbody>
