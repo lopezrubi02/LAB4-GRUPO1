@@ -20,7 +20,10 @@ public class Employees {
     @NotBlank(message = "No puede estar vacío")
     private String lastName;
     @Email(message = "Debe tener el formato: nombre@correo.com")
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",message = "Debe tener el formato: nombre@correo.com")
     private String email;
+    @Column(name="password")
     @NotBlank(message = "No puede estar vacío")
     @Size(min=8,message = "Debe tener un mínimo de 8 caracteres")
     private String password;
@@ -48,7 +51,7 @@ public class Employees {
     @JoinColumn(name ="job_id")
     private Jobs jobs;
     @Min(value = 1,message = "Tiene que ser mayor que 0")
-    @Digits(integer = 10,fraction = 0)
+    @Digits(integer = 10,fraction =0,message = "tiene que ser un número")
     private String salary;
     @Column(name = "commission_pct")
     private Double commissionPct;

@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.WebParam;
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,7 +52,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String guardarEmployee(@ModelAttribute("employees") @Valid Employees employees, BindingResult bindingResult,
+    public String guardarEmployee(@ModelAttribute("employee") @Valid Employees employees, BindingResult bindingResult,
                                   RedirectAttributes attr,
                                   @RequestParam(name="fechaContrato", required=false) String fechaContrato, Model model) {
 
@@ -91,6 +93,9 @@ public class EmployeeController {
         if (optEmployee.isPresent()) {
             employee = optEmployee.get();
             model.addAttribute("employee", employee);
+            model.addAttribute("listaJobs", jobsRepository.findAll());
+            model.addAttribute("listaJefes", employeesRepository.findAll());
+            model.addAttribute("listaDepartments", departmentsRepository.findAll());
             return "employee/Frm";
         } else {
             return "redirect:/employee/list";
@@ -111,6 +116,25 @@ public class EmployeeController {
         return "redirect:/employee";
 
     }
+
+    @InitBinder("employee")
+    public void validador(WebDataBinder binder) {
+
+        PropertyEditorSupport validacionEntero = new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                try {
+                    int entero = Integer.parseInt(text);
+                    this.setValue(entero > 10 && entero < 51 ? entero : 10);
+                } catch (NumberFormatException e) {
+                    this.setValue(0);
+                }
+            }
+        };
+        binder.registerCustomEditor(Integer.class, "salary", validacionEntero);
+    }
+
+
 
     //@PostMapping("/search")
     //public String buscar (){
