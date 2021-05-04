@@ -1,5 +1,7 @@
 package com.example.laboratorio4.controller;
+import com.example.laboratorio4.entity.Departments;
 import com.example.laboratorio4.entity.Employees;
+import com.example.laboratorio4.entity.Jobs;
 import com.example.laboratorio4.repository.DepartmentsRepository;
 import com.example.laboratorio4.repository.EmployeesRepository;
 import com.example.laboratorio4.repository.JobsRepository;
@@ -15,6 +17,7 @@ import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -39,10 +42,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/new")
-    public String nuevoEmployeeForm() {
-        //COMPLETAR
+    public String nuevoEmployeeForm(@ModelAttribute("employee") Employees employee,Model model) {
+        model.addAttribute("listaEmployee", employeesRepository.findAll());
+        model.addAttribute("listaJobs", jobsRepository.findAll());
+        model.addAttribute("listaDepartments", departmentsRepository.findAll());
         return "employee/Frm";
     }
+
+
 
     @PostMapping("/save")
     public String guardarEmployee(@ModelAttribute("employees") @Valid Employees employees, BindingResult bindingResult,
@@ -56,15 +63,15 @@ public class EmployeeController {
             return "employee/Frm";
         }else {
 
-            if (employees.getEmployeeid() == 0) {
+            if (employees.getEmployeeId() == 0) {
                 attr.addFlashAttribute("msg", "Empleado creado exitosamente");
-                employees.setHiredate(new Date());
+                employees.setHireDate(new Date());
                 employeesRepository.save(employees);
                 return "redirect:/employee";
             } else {
 
                 try {
-                    employees.setHiredate(new SimpleDateFormat("yyyy-MM-dd").parse(fechaContrato));
+                    employees.setHireDate(new SimpleDateFormat("yyyy-MM-dd").parse(fechaContrato));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -77,9 +84,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/edit")
-    public String editarEmployee() {
+    public String editarEmployee(Model model, @RequestParam("id") int id,
+                                 @ModelAttribute("employee") Employees employee) {
 
-        //COMPLETAR
+
+        Optional<Employees> optEmployee = employeesRepository.findById(id);
+
+        if (optEmployee.isPresent()) {
+            employee = optEmployee.get();
+            model.addAttribute("employee", employee);
+            return "employee/Frm";
+        } else {
+            return "redirect:/employee/list";
+        }
     }
 
     @GetMapping("/delete")
@@ -97,10 +114,10 @@ public class EmployeeController {
 
     }
 
-    @PostMapping("/search")
-    public String buscar (){
+    //@PostMapping("/search")
+    //public String buscar (){
 
         //COMPLETAR
-    }
+    //}
 
 }
