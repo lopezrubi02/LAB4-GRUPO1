@@ -58,7 +58,7 @@ public class EmployeeController {
 
         if(bindingResult.hasErrors()){
             model.addAttribute("listaJobs", jobsRepository.findAll());
-            model.addAttribute("listaJefes", employeesRepository.findAll());
+            model.addAttribute("listaEmployee", employeesRepository.findAll());
             model.addAttribute("listaDepartments", departmentsRepository.findAll());
             return "employee/Frm";
         }else {
@@ -94,7 +94,7 @@ public class EmployeeController {
             employee = optEmployee.get();
             model.addAttribute("employee", employee);
             model.addAttribute("listaJobs", jobsRepository.findAll());
-            model.addAttribute("listaJefes", employeesRepository.findAll());
+            model.addAttribute("listaEmployee", employeesRepository.findAll());
             model.addAttribute("listaDepartments", departmentsRepository.findAll());
             return "employee/Frm";
         } else {
