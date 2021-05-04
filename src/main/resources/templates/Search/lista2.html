@@ -12,12 +12,35 @@
 <div class="container">
     <h1>Empleados con Mayor Salario en la Empresa</h1>
     <!-- COMPLETAR -->
+    <form class="input-group mb-lg-3" method="post" th:action="@{busquedaSalario}">
+        <input name="searchField" class="form-control mb-3" type="number" placeholder="Buscar por Salario" th:text="${searchField}"/>
+        <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="submit" >Buscar</button>
+            <a class="btn btn-outline-danger ml-2" th:href="@{Salario}">Limpiar</a>
+            <a class="btn btn-outline-primary ml-2" th:href="@{/}">Regresar</a>
+        </div>
+
+    </form>
+    <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
     <table class="table">
         <thead>
-        <!-- COMPLETAR -->
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Fin</th>
+                <th>Puesto</th>
+            </tr>
         </thead>
         <tbody>
-        <!-- COMPLETAR -->
+            <tr th:each="usuario : ${listaUsuariosSalario}">
+
+                <td th:text="${usuario.first_name}"></td>
+                <td th:text="${usuario.last_name}"></td>
+                <td th:text="${usuario.getStart_date()}"></td>
+                <td th:text="${usuario.getEnd_date()}"></td>
+                <td th:text="${usuario.getJob_title()}"></td>
+            </tr>
         </tbody>
     </table>
 </div>
