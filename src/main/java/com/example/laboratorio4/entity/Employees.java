@@ -146,15 +146,5 @@ public class Employees {
         this.manager = manager;
     }
 
-    public Departments getDepartments() {
-        return departments;
-    }
 
-    public void setDepartments(Departments departments) {
-        this.departments = departments;
-    }
-
-    @ManyToOne
-    @JoinColumn(name="department_id")
-    private Departments departments;
 }
