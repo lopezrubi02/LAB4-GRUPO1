@@ -11,17 +11,29 @@
 <body>
 <div class="container">
     <h1>Recursos Humanos</h1>
-    <a class="btn btn-primary mt-4 mb-4" th:href="@{}">Nuevo Registro</a>
+    <a class="btn btn-primary mt-4 mb-4" th:href="@{/employee/new}">Nuevo Registro</a>
 
         <table class="table">
         <thead>
         <tr>
-            <!-- COMPLETAR-->
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cargo</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Años trabajados</th>
+            <th>Meses trabajados</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="historia : ${listaHistorial}">
-        <!-- COMPLETAR-->
+            <td th:text="${historia.getFirst_name()}"></td>
+            <td th:text="${historia.getLast_name()}"></td>
+            <td th:text="${historia.getJob_title()}"></td>
+            <td th:text="${historia.getFecha_inicio()}"></td>
+            <td th:text="${historia.getFecha_fin()}"></td>
+            <td th:text="${historia.getAnios_trabajados()}"></td>
+            <td th:text="${historia.getMeses_trabajados()}"></td>
         </tr>
         </tbody>
     </table>
