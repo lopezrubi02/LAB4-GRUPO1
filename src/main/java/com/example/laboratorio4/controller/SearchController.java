@@ -32,16 +32,17 @@ public class SearchController {
     }
 
     @PostMapping("/busquedaSalario")
-    public String buscar (@RequestParam("searchField") Double searchField, Model model, RedirectAttributes attr){
+    public String buscar (@RequestParam("searchField") String searchField, Model model, RedirectAttributes attr){
         System.out.println("El valor de la busqueda es "+searchField);
         try{
-            BigDecimal number= BigDecimal.valueOf(searchField);
+            Double number0 = Double.parseDouble(searchField);
+            BigDecimal number= BigDecimal.valueOf(number0);
             System.out.println("el valor de number es :"+ number);
             List<Empleadosporsalario>  listaUsuariosSalario = employeesRepository.empleadosBuscarSalario(number);
-            System.out.println(listaUsuariosSalario);
+            System.out.println(listaUsuariosSalario.size());
             System.out.println("############################################");
-            if(listaUsuariosSalario.isEmpty()){
-                attr.addFlashAttribute("msg","No se encontro resultados de la busqued realizada");
+            if(listaUsuariosSalario.size()==0){
+                attr.addFlashAttribute("msg","No se encontro resultados de la busqueda realizada");
             }
             model.addAttribute("listaUsuariosSalario",listaUsuariosSalario);
             System.out.println("Una Entrada");
