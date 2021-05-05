@@ -1,7 +1,7 @@
 package com.example.laboratorio4.controller;
 
 
-import com.example.laboratorio4.dto.Empleadosporsalario;
+import com.example.laboratorio4.dto.*;
 import com.example.laboratorio4.repository.EmployeesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +38,8 @@ public class SearchController {
             BigDecimal number= BigDecimal.valueOf(searchField);
             System.out.println("el valor de number es :"+ number);
             List<Empleadosporsalario>  listaUsuariosSalario = employeesRepository.empleadosBuscarSalario(number);
+            System.out.println(listaUsuariosSalario);
+            System.out.println("############################################");
             if(listaUsuariosSalario.isEmpty()){
                 attr.addFlashAttribute("msg","No se encontro resultados de la busqued realizada");
             }
